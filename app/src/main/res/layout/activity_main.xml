@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/btn_home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_home"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toStartOf="@id/btn_maps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_maps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toStartOf="@id/btn_parkmetre"
+        app:layout_constraintStart_toEndOf="@id/btn_home"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_parkmetre"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="park"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toStartOf="@id/btn_avis"
+        app:layout_constraintStart_toEndOf="@id/btn_maps"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_avis"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="avis"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_parkmetre"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_ten"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <Spinner
+        android:id="@+id/spn_Duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/gl_thirty"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_ten" />
+
+    <Button
+        android:id="@+id/btn_startTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="START"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_stopTimer"
+        app:layout_constraintTop_toBottomOf="@id/gl_thirty"
+        app:layout_constraintBottom_toTopOf="@id/gl_middle"/>
+
+    <Button
+        android:id="@+id/btn_stopTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="STOP"
+        app:layout_constraintStart_toEndOf="@id/btn_startTimer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_thirty"
+        app:layout_constraintBottom_toTopOf="@id/gl_middle"/>
+
+    <TextView
+        android:id="@+id/txtv_timer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="02:30:54"
+        android:textSize="80sp"
+        app:layout_constraintBottom_toTopOf="@id/gl_seventy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_middle" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_thirty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_seventy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
