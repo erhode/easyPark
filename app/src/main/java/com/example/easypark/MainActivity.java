@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
     Context ctx;
     boolean mContinueTimer = true;
 
-    private int mDurationSelected; //hours
+    Location mStartLocation, mEndLocation, mCurrentLocation;
+
+    //manage Timer
+    private int mDurationSelected; //in hours
     private int mDurationInHour;
     private int mDurationInMinute;
     private int mDurationInSeconds;
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         btn_startTimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    if (mDurationSelected > 0){
+                if (mDurationSelected > 0){
                     mDurationInHour = mDurationSelected - 1;
                     mDurationInMinute = 59;
                     mDurationInSeconds = 60;
@@ -99,7 +102,15 @@ public class MainActivity extends AppCompatActivity {
                     btn_startTimer.setEnabled(false);
                     btn_stopTimer.setEnabled(true);
                     startTimer();
+
+                    if (mLocationPermissionGranted) {
+                        getDeviceLocation();
+                        mStartLocation = mCurrentLocation;
+                    } else {
+                        getLocationPermission();
+                    }
                 }
+
             }
         });
 
@@ -134,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Log.d(TAG, "run: timer finished!!");
                         mContinueTimer = false;
+                        mEndLocation = mCurrentLocation;
                     }
 
                     txtv_timer.setText(String.format("%02d:%02d:%02d", mDurationInHour, mDurationInMinute, mDurationInSeconds));
@@ -154,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         list.add("4 heures");
         list.add("5 heures");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, list);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -183,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
         } else {
-            Log.d(TAG, "getLocationPermission: je n'ai pas la permission");
+            Log.d(TAG, "getLocationPermission: I don't have the permission");
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
@@ -194,19 +206,15 @@ public class MainActivity extends AppCompatActivity {
      * Handles the result of the request for location permissions.
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: callback-----------");
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         mLocationPermissionGranted = false;
         switch (requestCode) {
             case PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     mLocationPermissionGranted = true;
                     //updateLocationUI();
-                    getDeviceLocation();
+                    //getDeviceLocation();
                 }
             }
         }
@@ -214,13 +222,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void getDeviceLocation() {
         mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>(){
-
             @Override
             public void onSuccess(Location location) {
                 //Last known location, can be null
                 if (location != null) {
                     Log.d("location", "latitude: "+location.getLatitude());
                     Log.d("location", "longitude: "+location.getLongitude());
+                    mCurrentLocation = location;
                 }
             }
         });
