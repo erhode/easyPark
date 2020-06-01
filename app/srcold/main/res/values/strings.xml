@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">easyPark</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps_my_car">Map</string>
+</resources>

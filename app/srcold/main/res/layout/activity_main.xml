@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
-<!-->
+
     <Spinner
         android:id="@+id/spn_Duration"
         android:layout_width="wrap_content"
@@ -61,38 +61,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gl_ten" />
--->
+
     <Button
         android:id="@+id/btn_startTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start"
+        android:text="START"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_stopTimer"
-        app:layout_constraintTop_toBottomOf="@id/gl_seventy"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/gl_thirty"
+        app:layout_constraintBottom_toTopOf="@id/gl_middle"/>
 
     <Button
         android:id="@+id/btn_stopTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="@string/stop"
+        android:text="STOP"
         app:layout_constraintStart_toEndOf="@id/btn_startTimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_seventy"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <TextView
-        android:id="@+id/txtv_durationTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="28sp"
-        android:text="@string/time_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/gl_ten"
-        app:layout_constraintBottom_toTopOf="@id/txtv_timer" />
+        app:layout_constraintTop_toBottomOf="@id/gl_thirty"
+        app:layout_constraintBottom_toTopOf="@id/gl_middle"/>
 
     <TextView
         android:id="@+id/txtv_timer"
@@ -101,10 +90,10 @@
         android:gravity="center"
         android:text="00:00:00"
         android:textSize="80sp"
-        app:layout_constraintBottom_toTopOf="@id/gl_middle"
+        app:layout_constraintBottom_toTopOf="@id/gl_seventy"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtv_durationTitle" />
+        app:layout_constraintTop_toBottomOf="@id/gl_middle" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_thirty"
@@ -113,6 +102,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.3" />
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_middle"
         android:layout_width="0dp"
@@ -120,20 +110,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_seventy"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
-
-    <Button
-        android:id="@+id/btn_selectTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_duration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_middle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

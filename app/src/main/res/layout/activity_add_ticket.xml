@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <TextView
+        android:id="@+id/txtv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold|italic"
+        android:text="@string/addTicketTitle"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_ten"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <TextView
+        android:id="@+id/txtv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-Date :"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/glv_ten"
+        app:layout_constraintBottom_toTopOf="@id/txtv_dateValue"
+        app:layout_constraintTop_toBottomOf="@id/gl_ten" />
+
+    <TextView
+        android:id="@+id/txtv_dateValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xx/xx/xxxx"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/txtv_TimeEndValue"
+        app:layout_constraintTop_toBottomOf="@id/txtv_date"
+        app:layout_constraintBottom_toTopOf="@id/txtv_TimeStart"/>
+
+    <TextView
+        android:id="@+id/txtv_TimeStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-Heure Début :"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/glv_ten"
+        app:layout_constraintTop_toBottomOf="@id/txtv_dateValue"
+        app:layout_constraintBottom_toTopOf="@id/txtv_TimeStartValue"/>
+
+    <TextView
+        android:id="@+id/txtv_TimeStartValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/txtv_TimeEndValue"
+        app:layout_constraintTop_toBottomOf="@id/txtv_TimeStart"
+        app:layout_constraintBottom_toTopOf="@id/txtv_TimeEnd"/>
+
+    <TextView
+        android:id="@+id/txtv_TimeEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-Heure Fin :"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@+id/glv_ten"
+        app:layout_constraintTop_toBottomOf="@id/txtv_TimeStartValue"
+        app:layout_constraintBottom_toTopOf="@id/txtv_TimeEndValue"/>
+
+    <TextView
+        android:id="@+id/txtv_TimeEndValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_selectDuration"
+        app:layout_constraintStart_toStartOf="@id/glv_ten"
+        app:layout_constraintTop_toBottomOf="@id/txtv_TimeEnd"
+        app:layout_constraintBottom_toTopOf="@id/txtv_duree"/>
+
+    <Button
+        android:id="@+id/btn_selectDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/places_autocomplete_error_button"
+        android:text="@string/select_duration"
+        android:textColor="@color/quantum_white_text"
+        app:layout_constraintBottom_toBottomOf="@id/txtv_TimeEndValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/txtv_TimeEndValue"
+        app:layout_constraintTop_toTopOf="@id/txtv_TimeEndValue" />
+
+    <TextView
+        android:id="@+id/txtv_duree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-Durée :"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/glv_ten"
+        app:layout_constraintTop_toBottomOf="@id/txtv_TimeEndValue"
+        app:layout_constraintBottom_toTopOf="@id/txtv_dureeValue"/>
+
+    <TextView
+        android:id="@+id/txtv_dureeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:00:00"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="@id/txtv_TimeEndValue"
+        app:layout_constraintTop_toBottomOf="@id/txtv_duree"
+        app:layout_constraintBottom_toTopOf="@id/gl_seventy"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_thirty"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_middle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_seventy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <Button
+        android:id="@+id/btn_validate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/valider"
+        android:padding="20dp"
+        android:background="@color/quantum_grey300"
+        android:textColor="@color/quantum_white_text"
+        app:layout_constraintEnd_toStartOf="@id/btn_cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gl_seventy"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/annuler"
+        android:padding="20dp"
+        android:background="@color/quantum_googred300"
+        android:textColor="@color/quantum_white_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_validate"
+        app:layout_constraintTop_toTopOf="@id/btn_validate" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_ten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.03"
+        android:orientation="vertical"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

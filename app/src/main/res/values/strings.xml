@@ -2,4 +2,17 @@
     <string name="app_name">easyPark</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps_my_car">Map</string>
+
+    <string name="time_left">Temps restant</string>
+    <string name="time_left_error">Durée invalide</string>
+    <string name="select_duration">Sélectionner</string>
+
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+
+    <string name="valider">Valider</string>
+    <string name="annuler">Annuler</string>
+
+    <string name="addTicketTitle">Ajout d\'un nouveau ticket</string>
+    <string name="addTicketDuration">Durée du stationnement:</string>
 </resources>

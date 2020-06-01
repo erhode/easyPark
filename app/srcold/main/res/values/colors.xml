@@ -3,7 +3,4 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="validate">@color/quantum_googgreen300</color>
-    <color name="disabled">@color/quantum_grey300</color>
-
 </resources>
