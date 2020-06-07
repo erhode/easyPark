@@ -7,44 +7,48 @@
     tools:context=".activities.MainActivity">
 
     <ImageButton
-        android:id="@+id/btn_home"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_home"
-        app:layout_constraintBottom_toTopOf="@id/gl_ten"
-        app:layout_constraintEnd_toStartOf="@id/btn_maps"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
         android:id="@+id/btn_maps"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_location"
         app:layout_constraintBottom_toTopOf="@id/gl_ten"
-        app:layout_constraintEnd_toStartOf="@id/btn_parkmetre"
-        app:layout_constraintStart_toEndOf="@id/btn_home"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_parkmetre"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="park"
-        app:layout_constraintBottom_toTopOf="@id/gl_ten"
         app:layout_constraintEnd_toStartOf="@id/btn_avis"
-        app:layout_constraintStart_toEndOf="@id/btn_maps"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_avis"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="avis"
+        android:src="@drawable/ic_avis"
+        app:layout_constraintBottom_toTopOf="@id/gl_ten"
+        app:layout_constraintEnd_toStartOf="@id/btn_social"
+        app:layout_constraintStart_toEndOf="@id/btn_maps"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_social"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_person"
         app:layout_constraintBottom_toTopOf="@id/gl_ten"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_parkmetre"
+        app:layout_constraintStart_toEndOf="@id/btn_avis"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glv_send"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_ten"
@@ -52,59 +56,262 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
-<!-->
-    <Spinner
-        android:id="@+id/spn_Duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/gl_thirty"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_ten" />
--->
-    <Button
-        android:id="@+id/btn_startTimer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_stopTimer"
-        app:layout_constraintTop_toBottomOf="@id/gl_seventy"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <!-->
+        <Spinner
+            android:id="@+id/spn_Duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/gl_thirty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gl_ten" />
+    -->
 
-    <Button
-        android:id="@+id/btn_stopTimer"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_currentTicket"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="@string/stop"
-        app:layout_constraintStart_toEndOf="@id/btn_startTimer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_seventy"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_marginTop="10dp"
+
+        app:layout_constraintEnd_toEndOf="@id/glv_send"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toTopOf="@id/gl_ten">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/current_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/card_glv_middle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+
+            <TextView
+                android:id="@+id/txtv_TicketTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ticket en cours"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtv_currentTicket_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_TicketTitle" />
+
+            <TextView
+                android:id="@+id/txtv_currentTicket_Date_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00/00/2020"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_currentTicket_Date"
+                app:layout_constraintStart_toEndOf="@id/txtv_currentTicket_Date"
+                app:layout_constraintTop_toTopOf="@id/txtv_currentTicket_Date" />
+
+            <TextView
+                android:id="@+id/txtv_currentTicket_Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lieu: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_currentTicket_Date" />
+
+            <TextView
+                android:id="@+id/txtv_currentTicket_Location_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inconnu"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_currentTicket_Location"
+                app:layout_constraintStart_toEndOf="@id/txtv_currentTicket_Location"
+                app:layout_constraintTop_toTopOf="@id/txtv_currentTicket_Location" />
+
+            <TextView
+                android:id="@+id/txtv_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heure Début: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_currentTicket_Location" />
+
+            <TextView
+                android:id="@+id/txtv_start_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_start_time"
+                app:layout_constraintStart_toEndOf="@id/txtv_start_time"
+                app:layout_constraintTop_toTopOf="@id/txtv_start_time" />
+
+            <TextView
+                android:id="@+id/txtv_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heure Fin: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_start_time" />
+
+            <TextView
+                android:id="@+id/txtv_end_time_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_end_time"
+                app:layout_constraintStart_toEndOf="@id/txtv_end_time"
+                app:layout_constraintTop_toTopOf="@id/txtv_end_time" />
+
+            <TextView
+                android:id="@+id/txtv_durationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Temps restant: "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_end_time" />
+
+            <TextView
+                android:id="@+id/txtv_durationTitle_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_durationTitle"
+                app:layout_constraintStart_toEndOf="@id/txtv_durationTitle"
+                app:layout_constraintTop_toTopOf="@id/txtv_durationTitle" />
+
+            <Button
+                android:id="@+id/btn_cancel_ticket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arrêter"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtv_durationTitle_value" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/no_current_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aucun ticket en cours"
+                android:textColor="@color/quantum_grey500"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_newTicket"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/quantum_cyan500"
+                android:padding="20dp"
+                android:text="+ Nouveau ticket"
+                android:textColor="@color/quantum_white_text"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--
+            <TextView
+                android:id="@+id/txtv_TicketTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"
+                android:text="Ticket en cours"
+                app:layout_constraintStart_toStartOf="@id/glv_Ten"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/gl_ten"
+                app:layout_constraintBottom_toTopOf="@id/txtv_durationTitle" />
+
+
+            <TextView
+                android:id="@+id/txtv_durationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Temps restant:"
+                app:layout_constraintStart_toStartOf="@id/glv_Ten"
+                app:layout_constraintTop_toTopOf="@id/txtv_timer"
+                app:layout_constraintBottom_toBottomOf="@id/txtv_timer"
+                />
+
+            <TextView
+                android:id="@+id/txtv_timer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00:00:00"
+                android:textSize="35sp"
+                app:layout_constraintTop_toBottomOf="@id/txtv_TicketTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txtv_durationTitle"
+                />
+
+            <TextView
+                android:id="@+id/txtv_locationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:text="Lieu:"
+                app:layout_constraintStart_toStartOf="@id/glv_Ten"
+                app:layout_constraintTop_toBottomOf="@id/txtv_timer"
+                />s
+        -->
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/txtv_durationTitle"
+        android:id="@+id/txtv_historique_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="28sp"
-        android:text="@string/time_left"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/gl_ten"
-        app:layout_constraintBottom_toTopOf="@id/txtv_timer" />
+        android:layout_marginTop="10dp"
+        android:text="Historique des Tickets:"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@+id/card_currentTicket" />
 
-    <TextView
-        android:id="@+id/txtv_timer"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_historique"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:text="00:00:00"
-        android:textSize="80sp"
-        app:layout_constraintBottom_toTopOf="@id/gl_middle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtv_durationTitle" />
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_historique_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_thirty"
@@ -127,13 +334,5 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
-    <Button
-        android:id="@+id/btn_selectTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_duration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gl_middle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/current_ticket"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/card_glv_middle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.55" />
+
+        <TextView
+            android:id="@+id/txtv_currentTicket_Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtv_currentTicket_Date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00/00/2020"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/txtv_currentTicket_Date"
+            app:layout_constraintStart_toEndOf="@id/txtv_currentTicket_Date"
+            app:layout_constraintTop_toTopOf="@id/txtv_currentTicket_Date" />
+
+        <TextView
+            android:id="@+id/txtv_currentTicket_Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lieu: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtv_currentTicket_Date" />
+
+        <TextView
+            android:id="@+id/txtv_currentTicket_Location_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inconnu"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/txtv_currentTicket_Location"
+            app:layout_constraintStart_toEndOf="@id/txtv_currentTicket_Location"
+            app:layout_constraintTop_toTopOf="@id/txtv_currentTicket_Location" />
+
+        <TextView
+            android:id="@+id/txtv_start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heure Début: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtv_currentTicket_Location" />
+
+        <TextView
+            android:id="@+id/txtv_start_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/txtv_start_time"
+            app:layout_constraintStart_toEndOf="@id/txtv_start_time"
+            app:layout_constraintTop_toTopOf="@id/txtv_start_time" />
+
+        <TextView
+            android:id="@+id/txtv_end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Heure Fin: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtv_start_time" />
+
+        <TextView
+            android:id="@+id/txtv_end_time_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/txtv_end_time"
+            app:layout_constraintStart_toEndOf="@id/txtv_end_time"
+            app:layout_constraintTop_toTopOf="@id/txtv_end_time" />
+
+        <TextView
+            android:id="@+id/txtv_durationTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Duree: "
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtv_end_time" />
+
+        <TextView
+            android:id="@+id/txtv_durationTitle_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@id/txtv_durationTitle"
+            app:layout_constraintStart_toEndOf="@id/txtv_durationTitle"
+            app:layout_constraintTop_toTopOf="@id/txtv_durationTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

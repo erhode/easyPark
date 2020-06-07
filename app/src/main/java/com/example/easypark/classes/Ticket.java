@@ -6,6 +6,9 @@ public class Ticket implements Serializable {
     private int id;
     private String date, heureDebut, heureFin, duree;
     double longitude, latitude;
+    int dureeInHour, dureeInMin, dureeSec;
+
+
 
     public Ticket() {
         date = Time.getTodayDate();
@@ -76,6 +79,30 @@ public class Ticket implements Serializable {
 
     public void setHeureDebut(String heureDebut) {
         this.heureDebut = heureDebut;
+    }
+
+    public int getDureeInHour() {
+        return dureeInHour;
+    }
+
+    public void setDureeInHour(int dureeInHour) {
+        this.dureeInHour = dureeInHour;
+    }
+
+    public int getDureeInMin() {
+        return dureeInMin;
+    }
+
+    public void setDureeInMin(int dureeInMin) {
+        this.dureeInMin = dureeInMin;
+    }
+
+    public int getDureeSec() {
+        return dureeSec;
+    }
+
+    public void setDureeSec(int dureeSec) {
+        this.dureeSec = dureeSec;
     }
 
     @Override

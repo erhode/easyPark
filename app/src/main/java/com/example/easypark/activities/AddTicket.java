@@ -16,13 +16,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.easypark.R;
-import com.example.easypark.classes.DBHandler;
 import com.example.easypark.classes.MyLocationAddress;
 import com.example.easypark.classes.Ticket;
 import com.example.easypark.classes.Time;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class AddTicket extends AppCompatActivity {
 
@@ -95,7 +93,10 @@ public class AddTicket extends AppCompatActivity {
 
                         int hourDuration = duration / 60;
                         int minDuration = duration % 60;
-                        int secDuration = 0;
+                        int secDuration = 0; //always start at 0
+
+                        mTicket.setDureeInHour(hourDuration);
+                        mTicket.setDureeInMin(minDuration);
 
                         mTicket.setDuree(String.format("%02d:%02d:%02d", hourDuration, minDuration, secDuration));
                         txtv_dureeValue.setText(mTicket.getDuree());

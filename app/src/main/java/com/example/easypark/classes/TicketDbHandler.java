@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBHandler extends SQLiteOpenHelper {
+public class TicketDbHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "easyPark_db";
     private static final String TICKET_TABLE_NAME = "ticket";
@@ -21,7 +21,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TICKET_longitude = "longitude";
     private static final String TICKET_latitude = "latitude";
 
-    public DBHandler(Context context){
+    public TicketDbHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -87,10 +87,10 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // code to get all tickets in a list view
-    public List<Ticket> getAllContacts() {
-        List<Ticket> ticketList = new ArrayList<>();
+    public ArrayList<Ticket> getAllContacts() {
+        ArrayList<Ticket> ticketList = new ArrayList<>();
 
-        String selectQuery = "SELECT  * FROM " + TICKET_TABLE_NAME;
+        String selectQuery = "SELECT  * FROM " + TICKET_TABLE_NAME+ " ORDER BY id DESC;";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

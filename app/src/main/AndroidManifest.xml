@@ -16,8 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.AddTicket"></activity>
-        <activity android:name=".login" />
+        <activity android:name=".activities.AddAvisActivity"></activity>
+        <activity android:name=".activities.AvisActivity" />
+        <activity android:name=".activities.SignUpActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:windowSoftInputMode="stateUnspecified" />
+        <activity android:name=".activities.AddTicket" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,9 +54,10 @@
 
         <service
             android:name=".services.ChronoService"
+            android:exported="false"
             android:icon="@drawable/ic_home"
-            android:label="monservice"></service>
-
+            android:label="monservice"
+            android:process=":myBackgroundServiceProcess" />
     </application>
 
 </manifest>

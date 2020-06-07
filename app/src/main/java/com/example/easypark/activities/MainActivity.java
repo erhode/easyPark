@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,35 +23,38 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.example.easypark.R;
-import com.example.easypark.classes.DBHandler;
+import com.example.easypark.classes.TicketDbHandler;
 import com.example.easypark.classes.Ticket;
+import com.example.easypark.classes.TicketAdapter;
 import com.example.easypark.services.ChronoService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
 
-    public static DBHandler mDataBaseHandler;
+    public static TicketDbHandler mDataBaseHandler;
 
-    private Button btn_parkmetre, btn_avis, btn_startTimer, btn_stopTimer, btn_selectTime;
-    private ImageButton btn_home, btn_maps;
-    private TextView txtv_timer, txtv_durationTitle;
+    private Button btn_newTicket;
+    private ImageButton btn_maps, btn_social, btn_avis;
+    private TextView  txtv_durationTitle;
     //private Spinner spn_duration;
     private Context ctx;
     private boolean mContinueTimer = true;
-    private int mHour, mMinute;
+
+    public static Ticket mTicket;
 
     Location mStartLocation, mEndLocation, mCurrentLocation;
+
+    public static String userLogin = "";
 
     //manage Timer
     private int mDurationSelected; //in hours
@@ -63,31 +69,93 @@ public class MainActivity extends AppCompatActivity {
     private boolean mLocationPermissionGranted;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
 
+    BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mDurationInHour =(int)intent.getExtras().get("mDurationInHour");
+            mDurationInMinute =(int)intent.getExtras().get("mDurationInMinute");
+            mDurationInSeconds =(int)intent.getExtras().get("mDurationInSeconds");
+
+            Log.d("service", "onReceive: hour"+intent.getExtras().get("mDurationInHour"));
+            Log.d("service", "onReceive: min"+intent.getExtras().get("mDurationInMinute"));
+            Log.d("service", "onReceive: sec"+intent.getExtras().get("mDurationInMinute"));
+
+            if (mTicket!=null) {
+                mTicket.setDureeInHour(mDurationInHour);
+                mTicket.setDureeInMin(mDurationInMinute);
+                mTicket.setDureeSec(mDurationInSeconds);
+
+                String DurationLeft = String.format("%02d:%02d:%02d", mDurationInHour, mDurationInMinute, mDurationInSeconds);
+                ((TextView)findViewById(R.id.txtv_durationTitle_value)).setText(DurationLeft);
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ctx = this;
-        mDataBaseHandler = new DBHandler(ctx);
+        mDataBaseHandler = new TicketDbHandler(ctx);
 
         btn_maps = findViewById(R.id.btn_maps);
-        btn_startTimer = findViewById(R.id.btn_startTimer);
-        btn_stopTimer = findViewById(R.id.btn_stopTimer);
-        btn_parkmetre = findViewById(R.id.btn_parkmetre);
+        btn_social = findViewById(R.id.btn_social);
+        btn_newTicket = findViewById(R.id.btn_newTicket);
+        btn_avis = findViewById(R.id.btn_avis);
 
-        txtv_timer = findViewById(R.id.txtv_timer);
-        btn_selectTime = findViewById(R.id.btn_selectTime);
-        txtv_durationTitle = findViewById(R.id.txtv_durationTitle);
+        mTicket = null;
 
-        btn_maps.setOnClickListener(new View.OnClickListener() {
+
+        Intent intent = new Intent();
+        if(intent.getStringExtra("user") != null && !intent.getStringExtra("user").isEmpty()) {
+            userLogin =  intent.getStringExtra("user");
+        }
+
+        btn_newTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ctx, MapsActivity.class);
+                Intent intent = new Intent(ctx, AddTicket.class);
                 startActivity(intent);
             }
         });
 
+        btn_maps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(ctx, MapsActivity.class);
+            startActivity(intent);
+            }
+        });
+
+        btn_avis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userLogin.isEmpty()) {
+                    Toast.makeText(ctx, "Veuillez vous connecter pour consulter les avis", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(ctx, AvisActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        btn_social.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ctx, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_cancel_ticket).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTicket=null;
+                findViewById(R.id.current_ticket).setVisibility(View.INVISIBLE);
+                findViewById(R.id.no_current_ticket).setVisibility(View.VISIBLE);
+            }
+        });
         //spn_duration = findViewById(R.id.spn_Duration);
         //addItemToSpinner(spn_duration);
 /*
@@ -130,47 +198,8 @@ public class MainActivity extends AppCompatActivity {
         });
 */
 
-        btn_parkmetre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ctx, AddTicket.class);
-                startActivity(intent);
-            }
-        });
-
-
-        btn_startTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mDurationCalculated>0) {
-
-                    mContinueTimer = true;
-                    btn_startTimer.setEnabled(false);
-                    btn_stopTimer.setEnabled(true);
-                    startTimer();
-
-                    if (mLocationPermissionGranted) {
-                        getDeviceLocation();
-                        mStartLocation = mCurrentLocation;
-                    } else {
-                        getLocationPermission();
-                    }
-                }
-            }
-        });
-
-        btn_stopTimer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContinueTimer = false;
-                txtv_timer.setText("00:00:00");
-                btn_startTimer.setEnabled(true);
-                btn_stopTimer.setEnabled(false);
-            }
-        });
-
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
+/*
         btn_selectTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,6 +243,8 @@ public class MainActivity extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
+
+ */
     }
 
     //park duration in minutes
@@ -242,7 +273,14 @@ public class MainActivity extends AppCompatActivity {
                         mEndLocation = mCurrentLocation;
                     }
 
-                    txtv_timer.setText(String.format("%02d:%02d:%02d", mDurationInHour, mDurationInMinute, mDurationInSeconds));
+                    String DurationLeft = String.format("%02d:%02d:%02d", mDurationInHour, mDurationInMinute, mDurationInSeconds);
+                    ((TextView)findViewById(R.id.txtv_durationTitle_value)).setText(DurationLeft);
+
+                    if (mTicket!=null) {
+                        mTicket.setDureeInHour(mDurationInHour);
+                        mTicket.setDureeInMin(mDurationInMinute);
+                        mTicket.setDureeSec(mDurationInSeconds);
+                    }
                     startTimer();
                 }
             }
@@ -260,12 +298,10 @@ public class MainActivity extends AppCompatActivity {
         list.add("4 heures");
         list.add("5 heures");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, list);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, list);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn.setAdapter(dataAdapter);
-
     }
 
     @Override
@@ -330,30 +366,68 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        List<Ticket> ticketList = mDataBaseHandler.getAllContacts();
-        for(Ticket ticket:ticketList) {
+
+        IntentFilter filt = new IntentFilter("Duration");
+        this.registerReceiver(br, filt);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_historique);
+        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        ArrayList<Ticket> ticketList = mDataBaseHandler.getAllContacts();
+        RecyclerView.Adapter adapter = new TicketAdapter(ticketList);
+        recyclerView.setAdapter(adapter);
+
+        for (Ticket ticket:ticketList) {
             Log.d(TAG, "ticketList: "+ticket.toString());
         }
 
         String msg = getIntent().getStringExtra("startChrono");
-        Ticket currentTicket = (Ticket)getIntent().getSerializableExtra("ticket");
+        mTicket = (Ticket)getIntent().getSerializableExtra("ticket"); //récupération du ticket nouvellement créé
 
-        if (msg != null && msg.equals("true")) {
-            Log.d(TAG, "ticketList: start service"+msg);
-            startService();
+        if (mTicket!= null || (msg != null && msg.equals("true"))) {
+            Log.d(TAG, "ticketList: start service "+msg);
+            displayTicket(mTicket);
+            findViewById(R.id.current_ticket).setVisibility(View.VISIBLE);
+            findViewById(R.id.no_current_ticket).setVisibility(View.INVISIBLE);
+            mDurationInHour = mTicket.getDureeInHour();
+            mDurationInMinute = mTicket.getDureeInMin();
+            //startTimer();
+            startChronoService();
         } else {
+            findViewById(R.id.current_ticket).setVisibility(View.INVISIBLE);
+            findViewById(R.id.no_current_ticket).setVisibility(View.VISIBLE);
             Log.d(TAG, "ticketList: no start service"+msg);
-
         }
     }
 
-    private void startService() {
-        Intent i= new Intent(ctx, ChronoService.class);
-        i.putExtra("duree", "01:00:00");//todo to change
-        ctx.startService(i);
+    private void displayTicket(Ticket ticket) {
+        ((TextView)findViewById(R.id.txtv_currentTicket_Date_value)).setText(ticket.getDate());
+        ((TextView)findViewById(R.id.txtv_currentTicket_Location_value)).setText("pas encore");
+        ((TextView)findViewById(R.id.txtv_start_time_value)).setText(ticket.getHeureDebut());
+        ((TextView)findViewById(R.id.txtv_end_time_value)).setText(ticket.getHeureFin());
+        ((TextView)findViewById(R.id.txtv_durationTitle_value)).setText(ticket.getDuree());
     }
+
+    private void startChronoService() {
+        Intent i= new Intent(ctx, ChronoService.class);
+        i.putExtra("mDurationInHour", mTicket.getDureeInHour());
+        i.putExtra("mDurationInMinute", mTicket.getDureeInMin());
+        i.putExtra("mDurationInSeconds", mTicket.getDureeSec());
+        startService(i);
+        Log.d(TAG, "startService: demarrage du service");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(br);
+    }
+
 }

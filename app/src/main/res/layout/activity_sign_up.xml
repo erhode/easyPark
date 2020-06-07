@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.LoginActivity">
+    tools:context=".activities.SignUpActivity">
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glv_start"
@@ -24,24 +25,12 @@
         android:id="@+id/activity_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Se connecter:"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/glv_start"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/glh_20"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Veuillez remplir tous les champs"
-        android:visibility="invisible"
-        android:textSize="25sp"
-        android:textColor="@color/quantum_googred"
+        android:text="Rejoignez la communauté EasyPark"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_title"
-        app:layout_constraintBottom_toTopOf="@+id/glh_20"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/edtx_username"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glh_20"
@@ -58,7 +47,21 @@
         android:hint="Login"
         android:inputType="textPersonName"
         android:maxLines="1"
-        app:layout_constraintTop_toBottomOf="@id/glh_20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edtx_email"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"/>
+
+    <EditText
+        android:id="@+id/edtx_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:textSize="22sp"
+        android:maxLines="1"
+        android:hint="Email"
+        app:layout_constraintTop_toBottomOf="@id/edtx_username"
+        app:layout_constraintBottom_toTopOf="@id/edtx_pwd"
         app:layout_constraintStart_toStartOf="@id/glv_start"
         app:layout_constraintEnd_toEndOf="@id/glv_end"/>
 
@@ -77,21 +80,23 @@
         android:textSize="22sp"
         android:maxLines="1"
         android:hint="Password"
-        app:layout_constraintBottom_toBottomOf="@id/glh_40"
+        app:layout_constraintTop_toBottomOf="@id/edtx_email"
+        app:layout_constraintBottom_toTopOf="@id/edtx_repwd"
         app:layout_constraintStart_toStartOf="@id/glv_start"
         app:layout_constraintEnd_toEndOf="@id/glv_end"/>
 
-    <TextView
-        android:id="@+id/txtv_newUser"
-        android:layout_width="wrap_content"
+   <EditText
+        android:id="@+id/edtx_repwd"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="20dp"
-        android:text="Pas de compte? cliquez ici"
-        android:textSize="18sp"
-        android:textColor="@color/quantum_cyan500"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/glh_40" />
+        android:inputType="textPassword"
+        android:textSize="22sp"
+        android:maxLines="1"
+        android:hint="Password"
+        app:layout_constraintTop_toBottomOf="@id/edtx_pwd"
+       app:layout_constraintBottom_toTopOf="@+id/glh_80"
+        app:layout_constraintStart_toStartOf="@id/glv_start"
+        app:layout_constraintEnd_toEndOf="@id/glv_end"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/glh_60"
@@ -100,17 +105,24 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6"/>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/glh_80"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8"/>
+
     <Button
         android:id="@+id/btn_validate"
         android:text="Valider"
         android:textSize="20sp"
         android:padding="10dp"
         android:textColor="@color/quantum_white_text"
-        android:background="@color/quantum_grey300"
+        android:background="@color/validate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@id/glh_60"
+        app:layout_constraintTop_toBottomOf="@id/glh_80"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_cancel"/>
 
@@ -123,8 +135,9 @@
         android:background="@color/quantum_googred300"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/glh_60"
+        app:layout_constraintTop_toBottomOf="@id/glh_80"
         app:layout_constraintStart_toEndOf="@id/btn_validate"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
