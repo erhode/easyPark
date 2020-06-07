@@ -15,7 +15,7 @@ import com.example.easypark.classes.Time;
 
 public class AddAvisActivity extends AppCompatActivity {
 
-    Button btn_validate,btn_cancel;
+    Button btn_validate, btn_cancel;
 
     EditText edtx_avis;
 
@@ -36,7 +36,8 @@ public class AddAvisActivity extends AppCompatActivity {
                     Toast.makeText(AddAvisActivity.this, "veuillez laisser votre avis", Toast.LENGTH_SHORT).show();
                 } else {
                     Avis avis = new Avis(content, MainActivity.userLogin, Time.getTodayDate());
-                    AvisActivity.mAVisDataBaseHandler.addAvis(avis);
+                    //AvisActivity.mAVisDataBaseHandler.addAvis(avis);
+                    MainActivity.mDataBaseHandler.addAvis(avis);
                     Toast.makeText(AddAvisActivity.this, "Merci pour votre avis", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddAvisActivity.this, AvisActivity.class);
                     startActivity(intent);

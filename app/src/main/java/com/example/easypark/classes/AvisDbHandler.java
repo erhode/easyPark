@@ -5,32 +5,33 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 public class AvisDbHandler extends SQLiteOpenHelper {
-        private static final int DATABASE_VERSION = 1;
-        private static final String DATABASE_NAME = "easyPark_db";
-        private static final String AVIS_TABLE_NAME = "avis";
-        private static final String AVIS_id = "id";
-        private static final String AVIS_user = "user";
-        private static final String AVIS_DATE_CREATION = "date";
-        private static final String AVIS_content = "content";
+        private  final int DATABASE_VERSION = 2;
+        private  final String DATABASE_NAME = "easyPark_db";
+        private  final String AVIS_TABLE_NAME = "avis";
+        private  final String AVIS_id = "id";
+        private  final String AVIS_user = "user";
+        private  final String AVIS_DATE_CREATION = "date";
+        private  final String AVIS_content = "content";
 
         public AvisDbHandler(Context context){
-            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            super(context, TicketDbHandler.DATABASE_NAME, null, TicketDbHandler.DATABASE_VERSION);
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String CREATE_TICKETS_TABLE = "CREATE TABLE "+AVIS_TABLE_NAME+" ("
+            String CREATE_AVIS_TABLE = "CREATE TABLE "+AVIS_TABLE_NAME+" ("
                     +AVIS_id+" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                     +AVIS_content+" TEXT,"
                     +AVIS_user+" TEXT,"
                     +AVIS_DATE_CREATION+" TEXT"
                     +")";
-
-            db.execSQL(CREATE_TICKETS_TABLE);
+            Log.d("AvisDbHandler", "creation de la table");
+            db.execSQL(CREATE_AVIS_TABLE);
         }
 
         @Override

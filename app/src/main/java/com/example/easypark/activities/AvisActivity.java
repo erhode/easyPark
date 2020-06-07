@@ -44,6 +44,19 @@ public class AvisActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btn_home).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AvisActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         RecyclerView recyclerView = findViewById(R.id.recycler_avis);
         recyclerView.setHasFixedSize(true);
 
@@ -51,12 +64,14 @@ public class AvisActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        ArrayList<Avis> avisList = mAVisDataBaseHandler.getAllAvis();
+        ArrayList<Avis> avisList =  MainActivity.mDataBaseHandler.getAllAvis();
         RecyclerView.Adapter adapter = new AvisAdapter(avisList);
         recyclerView.setAdapter(adapter);
 
         for (Avis avis:avisList) {
             Log.d(TAG, "avis: "+avis.toString());
         }
+
+
     }
 }

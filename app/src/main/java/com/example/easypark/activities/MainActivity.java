@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     Location mStartLocation, mEndLocation, mCurrentLocation;
 
-    public static String userLogin = "";
+    public static String userLogin;
 
     //manage Timer
     private int mDurationSelected; //in hours
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Intent intent = new Intent();
-        if(intent.getStringExtra("user") != null && !intent.getStringExtra("user").isEmpty()) {
+        if (intent.getStringExtra("user") != null && !intent.getStringExtra("user").isEmpty()) {
             userLogin =  intent.getStringExtra("user");
         }
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         btn_avis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userLogin.isEmpty()) {
+                if (userLogin== null || userLogin.isEmpty()) {
                     Toast.makeText(ctx, "Veuillez vous connecter pour consulter les avis", Toast.LENGTH_SHORT).show();
                 } else {
                     Intent intent = new Intent(ctx, AvisActivity.class);
